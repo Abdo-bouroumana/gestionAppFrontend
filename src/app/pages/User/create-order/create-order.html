@@ -1,0 +1,68 @@
+<div class="container py-4">
+    <div class="mx-auto chat-wrap">
+      <div class="card chat-card">
+        <div class="chat-header d-flex align-items-center justify-content-between">
+          <div class="title">Create Order</div>
+          <span class="badge bg-light text-dark">Chat Mode</span>
+        </div>
+
+        <form [formGroup]="orderForm" class="chat-body needs-validation" novalidate>
+          <!-- Bot prompt -->
+          <div class="bubble bot">
+            <div class="fw-semibold">👋 Hi! Let’s create a new order. Fill the details below.</div>
+          </div>
+
+          <!-- Title -->
+          <div class="bubble user">
+            <div class="bubble-label required">Title</div>
+            <input formControlName="title" type="text" class="form-control" name="title" placeholder="e.g., Monthly Maintenance Package" required>
+            <div class="invalid-feedback">Please provide a title.</div>
+          </div>
+
+          <!-- Type -->
+          <div class="bubble user">
+            <div class="bubble-label required">Type</div>
+            <select formControlName="type" class="form-select" name="type" required>
+              <option value="" selected disabled>Choose type…</option>
+              <option value="SERVICE">SERVICE</option>
+              <option value="PRODUCT">PRODUCTS</option>
+            </select>
+            <div class="invalid-feedback">Please choose an order type.</div>
+            <div class="form-text">Select <strong>SERVICE</strong> for labor/tasks, <strong>PRODUCTS</strong> for items.</div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="bubble user">
+            <div class="bubble-label required">Quantity</div>
+            <input formControlName="quantity" type="number" class="form-control" name="quantity" min="1" step="1" placeholder="1" required>
+            <div class="invalid-feedback">Quantity must be at least 1.</div>
+          </div>
+
+          <!-- Comment -->
+          <div class="bubble user">
+            <div class="bubble-label">Comment</div>
+            <textarea formControlName="comment" class="form-control" name="comment" rows="3" placeholder="Optional notes…"></textarea>
+            <div class="form-text">Add any details your team should know.</div>
+          </div>
+
+          <!-- Bot closing -->
+          <div class="bubble bot">
+            Looks good! Submit when you’re ready.
+          </div>
+
+          <!-- Actions -->
+          <div class="actions pt-2">
+            <div class="d-flex gap-2 justify-content-end">
+              <button type="reset" class="btn btn-outline-secondary">Reset</button>
+              <button type="button" class="btn btn-primary" (click)="onCreateOrder()">Create Order</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Small helper -->
+      <p class="text-muted text-center mt-3 mb-0" style="font-size:.9rem;">
+        Fields marked with <span class="text-danger">*</span> are required.
+      </p>
+    </div>
+  </div>

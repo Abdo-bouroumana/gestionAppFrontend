@@ -1,0 +1,146 @@
+<div class="personal-info-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="bi bi-person-circle"></i>
+                Personal Information
+            </h1>
+            <p class="page-subtitle">View and manage your account details and profile information</p>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="bi bi-person"></i>
+                </div>
+                <h2 class="profile-name">
+                    @if (personalInfo.role == "ADMIN") {
+                                        ADMINISTRATOR
+                                    }@else{
+                                        USER
+                                    }
+                </h2>
+                <span class="profile-role">System @if (personalInfo.role == "ADMIN") {
+                                        Administrator
+                                    }@else{
+                                        User
+                                    }</span>
+            </div>
+
+            <!-- Profile Information -->
+            <div class="profile-info">
+                <!-- Account Information Section -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="bi bi-person-gear"></i>
+                        Account Information
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-person"></i>
+                                Username
+                            </div>
+                            <div class="info-value">{{personalInfo.username}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-envelope"></i>
+                                Email Address
+                            </div>
+                            <div class="info-value">{{personalInfo.email}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Role & Permissions Section -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="bi bi-shield-check"></i>
+                        Role & Permissions
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-award"></i>
+                                User Role
+                            </div>
+                            <div class="info-value">
+                                <span class="role-badge">
+                                    @if (personalInfo.role == "ADMIN") {
+                                        Admin
+                                    }@else{
+                                        User
+                                    }</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-toggle-on"></i>
+                                Account Status
+                            </div>
+                            <div class="info-value">
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    @if (personalInfo.isActive == true) {
+                                        Active
+                                    }@else{
+                                        Inactive
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Information Section -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="bi bi-clock-history"></i>
+                        Login Information
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-door-open"></i>
+                                First Login
+                            </div>
+                            <div class="info-value">
+                                <span class="boolean-badge boolean-true">
+                                    <i class="bi bi-check"></i>
+                                    @if (personalInfo.firstLogin == true) {
+                                        Yes
+                                    }@else{
+                                        No
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="bi bi-calendar-event"></i>
+                                Last Login
+                            </div>
+                            <div class="info-value">{{loginDateTime}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Updated Info -->
+                <div class="last-updated">
+                    <div class="last-updated-label">Profile Last Updated</div>
+                    <div class="last-updated-value">X X X</div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="actions-section">
+                    <a href="#" class="btn btn-edit">
+                        <i class="bi bi-pencil"></i>
+                        Edit Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

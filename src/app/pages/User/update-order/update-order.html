@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-edit me-3"></i>Update Orders</h1>
+        <p class="text-muted mb-0">Manage and modify your order details</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table order-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders" 
+                    [class.edit-mode]="isEditing(order.id)"
+                    [attr.data-order-id]="order.id">
+                    
+                    <td><span class="order-id">#{{order.id}}</span></td>
+                    
+                    <!-- Title Field -->
+                    <td class="editable-field">
+                        <span *ngIf="!isEditing(order.id)">{{order.title}}</span>
+                        <input *ngIf="isEditing(order.id)" 
+                               type="text" 
+                               class="form-control form-control-sm"
+                               [(ngModel)]="order.title">
+                    </td>
+                    
+                    <!-- Type Field -->
+                    <td class="editable-field">
+                        <span *ngIf="!isEditing(order.id)">{{order.type}}</span>
+                        <select *ngIf="isEditing(order.id)" 
+                                class="form-select form-select-sm"
+                                [(ngModel)]="order.type">
+                            <option value="PRODUCT">PRODUCT</option>
+                            <option value="SERVICE">SERVICE</option>
+                        </select>
+                    </td>
+                    
+                    <!-- Quantity Field -->
+                    <td class="editable-field">
+                        <span *ngIf="!isEditing(order.id)">{{order.quantity}}</span>
+                        <input *ngIf="isEditing(order.id)" 
+                               type="number" 
+                               min="1" 
+                               max="999"
+                               class="form-control form-control-sm"
+                               [(ngModel)]="order.quantity">
+                    </td>
+                    
+                    <!-- Comment Field -->
+                    <td class="editable-field">
+                        <span *ngIf="!isEditing(order.id)">{{order.comment}}</span>
+                        <textarea *ngIf="isEditing(order.id)" 
+                                  class="form-control form-control-sm"
+                                  rows="2"
+                                  [(ngModel)]="order.comment"></textarea>
+                    </td>
+                    
+                    <!-- Date -->
+                    <td class="order-date">{{formatDate(order.createdAt)}}</td>
+                    
+                    <!-- Status -->
+                    <td>
+                        <span class="order-status" [ngClass]="getStatusClass(order.status)">
+                            {{order.status}}
+                        </span>
+                    </td>
+                    
+                    <!-- Actions -->
+                    <td>
+                        <div *ngIf="!isEditing(order.id)">
+                            <button class="btn btn-edit btn-sm" 
+                                    (click)="startEdit(order)">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </button>
+                        </div>
+                        
+                        <div *ngIf="isEditing(order.id)">
+                            <button class="btn btn-save btn-sm me-2" 
+                                    (click)="saveEdit(order)">
+                                <i class="fas fa-check me-1"></i>Save
+                            </button>
+                            <button class="btn btn-cancel btn-sm" 
+                                    (click)="cancelEdit(order)">
+                                <i class="fas fa-times me-1"></i>Cancel
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Empty state -->
+                <tr *ngIf="orders.length === 0">
+                    <td colspan="8" class="text-center py-4">
+                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No orders found</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

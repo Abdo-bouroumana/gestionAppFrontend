@@ -1,0 +1,115 @@
+<div class="parent">
+    <div class="create-user-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="bi bi-person-plus"></i>
+                Create New User
+            </h1>
+            <p class="page-subtitle">Add a new user to the system with their basic information and permissions</p>
+        </div>
+
+        <!-- Create User Form -->
+        <div class="form-card">
+            <form [formGroup]="createUserForm">
+                <!-- Username Field -->
+                <div class="form-section">
+                    <label for="username" class="form-label">
+                        <i class="bi bi-person"></i>
+                        Username <span class="required-field">*</span>
+                    </label>
+                    <input formControlName="username" type="text" class="form-control" id="username" name="username"
+                        required placeholder="Enter username (e.g., john_doe)">
+                    <div class="form-help-text">
+                        Username must be 3-20 characters long and contain only letters, numbers, and underscores.
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-section">
+                    <label for="email" class="form-label">
+                        <i class="bi bi-envelope"></i>
+                        Email Address <span class="required-field">*</span>
+                    </label>
+                    <input formControlName="email" type="email" class="form-control" id="email" name="email" required
+                        placeholder="Enter email address (e.g., john@example.com)">
+                    <div class="form-help-text">
+                        This will be used for login and system notifications.
+                    </div>
+                </div>
+
+                <!-- Role and Active Account Row -->
+                <div class="form-row-custom">
+                    <!-- Role Field -->
+                    <div class="form-section">
+                        <label for="role" class="form-label">
+                            <i class="bi bi-shield-check"></i>
+                            User Role <span class="required-field">*</span>
+                        </label>
+                        <select formControlName="role" class="form-select" id="role" name="role" required>
+                            <option value="" disabled selected>Select a role</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="USER">User</option>
+                        </select>
+                        <div class="form-help-text">
+                            Determines the user's permissions and access level.
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-lock"></i>
+                            Password <span class="required-field">*</span>
+                        </label>
+                        <div class="password-input-wrapper position-relative">
+                            <input formControlName="password" type="password" class="form-control" id="password" name="password" required
+                                placeholder="Enter secure password" minlength="8">
+                            <button type="button" class="password-toggle-btn position-absolute" tabindex="-1">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-help-text">
+                            Password must be at least 8 characters long and include uppercase, lowercase, numbers, and
+                            special characters.
+                        </div>
+                    </div>
+
+                    <!-- Active Account Toggle -->
+                    <div class="form-section">
+                        <label class="form-label">
+                            <i class="bi bi-toggle-on"></i>
+                            Account Status
+                        </label>
+                        <div class="form-switch-custom">
+                            <input class="form-check-input" type="checkbox" id="isActive" name="isActive"
+                                formControlName="isActive">
+                            <label class="form-check-label" for="isActive">
+                                Active Account
+                                <span class="switch-status">Active</span>
+                            </label>
+                        </div>
+                        <div class="form-help-text">
+                            Active accounts can log in and access the system. Inactive accounts are disabled.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-section">
+                    <div class="btn-group-custom">
+                        <button (click)="onCreateUser()" type="button" class="btn btn-primary-custom">
+                            <i class="bi bi-check-circle"></i>
+                            Create User
+                        </button>
+                        <button type="reset" class="btn btn-secondary-custom">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>

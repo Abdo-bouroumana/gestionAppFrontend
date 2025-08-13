@@ -1,0 +1,98 @@
+<div class="parent">
+
+<div class="users-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Users Management</h1>
+            <p class="page-subtitle">Manage and monitor all registered users in the system</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-card">
+            <h5 class="filters-title">
+                <i class="bi bi-funnel"></i>
+                Filters
+            </h5>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="filterUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="filterUsername" placeholder="Search by username..." [(ngModel)]="filterUsername">
+                </div>
+                <div class="col-md-3">
+                    <label for="filterEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="filterEmail" placeholder="Search by email..."  [(ngModel)]="filterEmail">
+                </div>
+                <div class="col-md-2">
+                    <label for="filterRole" class="form-label">Role</label>
+                    <select class="form-select" id="filterRole" [(ngModel)]="filterRole">
+                        <option value="">All Roles</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="USER">User</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="filterActive" class="form-label" >Status</label>
+                    <select class="form-select" id="filterActive" [(ngModel)]="filterActive">
+                        <option value="">All Status</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-clear w-100" (click)="clearFilters()">
+                        <i class="bi bi-x-circle me-1"></i>
+                        Clear Filters
+                    </button>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100" (click)="applyUserFilters()">
+                        <i class="bi bi-funnel me-1"></i>
+                        Confirm Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-card">
+            <h5 class="table-header">
+                <i class="bi bi-people"></i>
+                Users List
+            </h5>
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">First Login</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Sample Data -->
+
+                            
+                            <tr *ngFor="let item of filteredUsers; let i = index">
+                                <td class="username-cell">{{item.username}}</td>
+                                <td class="email-cell">{{item.email}}</td>
+                                <td><span class="badge badge-role">{{ item.role === 'ADMIN' ? 'Admin' : 'User'}}</span></td>
+                                <td><span class="badge badge-status badge-active"> {{ item.isActive === true ? 'Active' : 'Inactive'}}</span></td>
+                                <td><span class="badge badge-boolean badge-true">{{ item.firstLogin === true ? 'Yes' : 'No'}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- No Data State (hidden by default) -->
+                <div class="no-data d-none" id="noDataMessage">
+                    <i class="bi bi-inbox"></i>
+                    <h5>No users found</h5>
+                    <p>Try adjusting your filters or check back later.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

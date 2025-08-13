@@ -1,0 +1,128 @@
+<div class="orders-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">
+            <i class="bi bi-bag-check me-3"></i>
+            Orders Management
+        </h1>
+        <p class="page-subtitle">Monitor and manage all customer orders with real-time status updates</p>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters-card">
+        <h5 class="filters-title">
+            <i class="bi bi-funnel"></i>
+            Filters
+        </h5>
+        <div class="row g-3">
+            <div class="col-lg-2 col-md-3">
+                <label for="filterUser" class="form-label">User</label>
+                <input type="text" class="form-control" id="filterUser" placeholder="Search by user..." [(ngModel)]="filterUser">
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <label for="filterTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="filterTitle" placeholder="Search by title..." [(ngModel)]="filterTitle">
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <label for="filterType" class="form-label">Type</label>
+                <select class="form-select" id="filterType" [(ngModel)]="filterType">
+                    <option value="">All Types</option>
+                    <option value="PRODUCT">Product</option>
+                    <option value="SERVICE">Service</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <label for="filterStatus" class="form-label">Status</label>
+                <select class="form-select" id="filterStatus" [(ngModel)]="filterStatus">
+                    <option value="">All Status</option>
+                    <option value="EN_COURS">En Cours</option>
+                    <option value="CONFIRMEE">Confirmée</option>
+                    <option value="LIVREE">Livrée</option>
+                    <option value="ANNULEE">Annulée</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <label for="filterDeleted" class="form-label">Deleted</label>
+                <select class="form-select" id="filterDeleted" [(ngModel)]="filterDeleted">
+                    <option value="">All Orders</option>
+                    <option value="false">Active</option>
+                    <option value="true">Deleted</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-6 d-flex align-items-end">
+                <button type="button" class="btn btn-clear w-100" (click)="clearOrderFilters()">
+                    <i class="bi bi-x-circle me-1"></i>
+                    Clear
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-6 d-flex align-items-end">
+                <button type="button" class="btn btn-primary w-100" (click)="applyOrderFilters()">
+                    <i class="bi bi-funnel me-1"></i>
+                    Confirm Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="table-card">
+        <h5 class="table-header">
+            <i class="bi bi-list-check"></i>
+            Orders List
+        </h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>Comment</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Deleted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of filteredOrders; let i = index">
+                        <td class="username-cell">{{personalInfo.username}}</td>
+                        <td class="title-cell" title="Premium WordPress Theme Package">{{item.title}}
+                        </td>
+                        <td><span class="type-badge">{{item.type}}</span></td>
+                        <td><span class="quantity-badge">{{item.quantity}}</span></td>
+                        <td>
+                            <div class="status-controls">
+                                <div class="status-display">
+                                    <span class="status-badge status-en-cours">{{item.status}}</span>
+                                    <!-- <button class="btn-edit-status" (click)="editStatus($event)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button> -->
+                                </div>
+                                <!-- <div class="status-edit">
+                                    <select [(ngModel)]="selectedValue" class="status-select" >
+                                        <option value="EN_COURS" selected>EN_COURS</option>
+                                        <option value="CONFIRMEE">CONFIRMEE</option>
+                                        <option value="LIVREE">LIVREE</option>
+                                        <option value="ANNULEE">ANNULEE</option>
+                                    </select>
+                                    <button class="btn-confirm" (click)="confirmStatus($event)" (click)="updateStatus(item.id)">
+                                        <i class="bi bi-check"></i>
+                                    </button>
+                                    <button class="btn-cancel" (click)="cancelEdit($event)">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div> -->
+                            </div>
+                        </td>
+                        <td class="comment-cell" title="Customer requested expedited delivery">{{item.comment}}</td>
+                        <td class="date-cell">{{formatDate(item.createdAt)}}</td>
+                        <td class="date-cell">{{formatDate(item.updatedAt)}}</td>
+                        <td><span class="not-deleted-badge">{{item.deleted}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
