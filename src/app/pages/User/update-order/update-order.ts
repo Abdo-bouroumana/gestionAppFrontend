@@ -98,6 +98,22 @@ export class UpdateOrder implements OnInit {
     }
   }
 
+  onCancelOrder(id: number){
+    debugger;
+    if (confirm('Are you sure you want to cancel this order? This action cannot be undone.')) {
+      this.orderService.cancelOrder(id).subscribe({
+        next: () => {
+          this.showToast('Order cancelled successfully!', 'success');
+          this.loadMyOrders(); // Refresh the order list
+        },
+        error: (error) => {
+          console.error('Error cancelling order:', error);
+          this.showToast('Error cancelling order', 'danger');
+        }
+      });
+    }
+  }
+
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString();

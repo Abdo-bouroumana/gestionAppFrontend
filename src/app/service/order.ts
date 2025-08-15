@@ -79,5 +79,18 @@ export class Order {
     })
   }
 
+  cancelOrder(id: number){
+    debugger;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No token found'));
+    }
+    return this.http.delete(`http://localhost:8080/orders/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
 
 }

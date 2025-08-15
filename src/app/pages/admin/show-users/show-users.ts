@@ -43,6 +43,8 @@ export class ShowUsers implements OnInit{
     });
   }
 
+  
+
   clearFilters() {
     this.filterUsername = '';
     this.filterEmail = '';

@@ -39,6 +39,21 @@ export class UpdateUser implements OnInit {
     });
   }
 
+  onDeleteUser(id: number){
+    if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          this.showToast('User deleted successfully!', 'success');
+          this.loadAllUsers(); // Refresh the user list
+        },
+        error: (error) => {
+          console.error('Error deleting user:', error);
+          this.showToast('Error deleting user', 'danger');
+        }
+      });
+    }
+  }
+
   startEdit(user: APIResponseUser) {
     this.editingUserId = user.id;
     this.originalData[user.id] = {
